@@ -14,17 +14,23 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 @Mod(modid="Generic", name="Generic", version="0.0.0")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class Generic {
 
-        // The instance of your mod that Forge uses.
+	private final static Item genericItem = new GenericItem(5000);
+	private final static Item specificItem = new GenericItem(5001)
+		.setMaxStackSize(16).setIconIndex(1).setItemName("specificItem");
+	
+	// The instance of your mod that Forge uses.
 	@Instance
 	public static Generic instance;
 	
 	// Says where the client and server 'proxy' code is loaded.
-	@SidedProxy(clientSide="tutorial.generic.client.ClientProxy", serverSide="tutorial.generic.CommonProxy")
+	@SidedProxy(clientSide="tutorial.generic.client.ClientProxy",
+			serverSide="tutorial.generic.CommonProxy")
 	public static CommonProxy proxy;
 	
 	@PreInit
@@ -34,7 +40,7 @@ public class Generic {
 	
 	@Init
 	public void load(FMLInitializationEvent event) {
-		// Crafting Recipes
+		// Crafting and Smelting
 		ItemStack dirtStack = new ItemStack(Block.dirt);
 		ItemStack diamondsStack = new ItemStack(Item.diamond, 64);
 		ItemStack blackWoolStack = new ItemStack(Block.cloth, 42, 15);
@@ -54,8 +60,14 @@ public class Generic {
 		GameRegistry.addRecipe(new ItemStack(Block.stone), "xyx", "y y", "xyx",
 		        'x', dirtStack, 'y', gravelStack);
 		
-		GameRegistry.addSmelting(Block.stone.blockID, new ItemStack(Block.stoneBrick), 0.1f);
+		GameRegistry.addSmelting(Block.stone.blockID, 
+				new ItemStack(Block.stoneBrick), 0.1f);
+		// End Crafting and Smelting
 		
+		// Basic Items
+		LanguageRegistry.addName(genericItem, "Generic Item");
+		LanguageRegistry.addName(specificItem, "Specific Item");
+		// End Basic Items
 	}
 	
 	@PostInit
