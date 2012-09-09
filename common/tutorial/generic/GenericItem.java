@@ -15,6 +15,14 @@ public class GenericItem extends Item {
         setItemName("genericItem");
 	}
 	
+	public GenericItem(int id, int maxStackSize, CreativeTabs tab, int texture, String name) {
+		super(id);
+		setMaxStackSize(maxStackSize);
+		setTabToDisplayOn(tab);
+		setIconIndex(texture);
+		setItemName(name);
+	}
+	
 	public String getTextureFile() {
 	    return CommonProxy.ITEMS_PNG;
 	}

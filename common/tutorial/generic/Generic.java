@@ -1,8 +1,14 @@
 package tutorial.generic;
 
+// This Import list will grow longer with each additional tutorial.
+// It's not pruned between full class postings, unlike other tutorial code.
 import net.minecraft.src.Block;
+import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
+import net.minecraft.src.Material;
+import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -20,9 +26,17 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class Generic {
 
-	private final static Item genericItem = new GenericItem(5000);
-	private final static Item specificItem = new GenericItem(5001)
+	// Begin Basic Items
+	public final static Item genericItem = new GenericItem(5000);
+	public final static Item genericIngot = new GenericItem(5001)
 		.setMaxStackSize(16).setIconIndex(1).setItemName("specificItem");
+	// End Basic Items
+	
+	// Begin Basic Blocks
+	public final static Block genericDirt = new GenericBlock(500, 0, Material.ground)
+		.setHardness(0.5F).setStepSound(Block.soundGravelFootstep)
+		.setBlockName("genericDirt").setCreativeTab(CreativeTabs.tabDeco);
+	public final static Block genericOre = new GenericOre(501, 1);
 	
 	// The instance of your mod that Forge uses.
 	@Instance
@@ -66,8 +80,17 @@ public class Generic {
 		
 		// Basic Items
 		LanguageRegistry.addName(genericItem, "Generic Item");
-		LanguageRegistry.addName(specificItem, "Specific Item");
+		LanguageRegistry.addName(genericIngot, "Specific Item");
 		// End Basic Items
+		
+		// Basic Blocks
+		LanguageRegistry.addName(genericDirt, "Generic Dirt");
+		MinecraftForge.setBlockHarvestLevel(genericDirt, "shovel", 0);
+		
+		LanguageRegistry.addName(genericOre, "Genreric Ore");
+		MinecraftForge.setBlockHarvestLevel(genericOre, "pickaxe", 3);
+		
+		proxy.registerRenderers();
 	}
 	
 	@PostInit

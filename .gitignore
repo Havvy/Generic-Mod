@@ -6,4 +6,11 @@ minecraft/ibxm/*
 minecraft/net/*
 minecraft/paulscode/*
 minecraft_server/*
-common/*
+common/cpw/*
+common/havvy/*
+common/net/*
+common/org/*
+common/fml_at.cfg
+common/fml_marker.cfg
+common/fmlversion.properties
+common/forge_at.cfg
