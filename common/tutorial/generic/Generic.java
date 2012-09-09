@@ -35,7 +35,7 @@ public class Generic {
 	// Begin Basic Blocks
 	public final static Block genericDirt = new GenericBlock(500, 0, Material.ground)
 		.setHardness(0.5F).setStepSound(Block.soundGravelFootstep)
-		.setBlockName("genericDirt").setCreativeTab(CreativeTabs.tabDeco);
+		.setBlockName("genericDirt").setCreativeTab(CreativeTabs.tabBlock);
 	public final static Block genericOre = new GenericOre(501, 1);
 	
 	// The instance of your mod that Forge uses.
@@ -84,11 +84,14 @@ public class Generic {
 		// End Basic Items
 		
 		// Basic Blocks
+		GameRegistry.registerBlock(genericDirt);
 		LanguageRegistry.addName(genericDirt, "Generic Dirt");
 		MinecraftForge.setBlockHarvestLevel(genericDirt, "shovel", 0);
 		
+		GameRegistry.registerBlock(genericOre);
 		LanguageRegistry.addName(genericOre, "Genreric Ore");
 		MinecraftForge.setBlockHarvestLevel(genericOre, "pickaxe", 3);
+		// End Basic Blocks
 		
 		proxy.registerRenderers();
 	}
