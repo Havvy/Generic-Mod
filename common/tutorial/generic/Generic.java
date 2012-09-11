@@ -3,6 +3,7 @@ package tutorial.generic;
 // This Import list will grow longer with each additional tutorial.
 // It's not pruned between full class postings, unlike other tutorial code.
 import net.minecraft.src.Block;
+import net.minecraft.src.CraftingManager;
 import net.minecraft.src.CreativeTabs;
 import net.minecraft.src.Item;
 import net.minecraft.src.ItemStack;
@@ -22,6 +23,18 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
+/**
+ * @author havvy
+ * This is the Base mod class for the Generic Mod, a set of tutorials located
+ * at http://minecraftforge.net/wiki/Category:Generic_Mod
+ * 
+ * Fields are at the top of the class, with the section they belong to shown
+ * via comment.
+ * 
+ * Modifications to the load method are done inside a private method called
+ * initNameOfSection. This is done for clarity in this base source, and the
+ * function is inlined in the tutorials themselves.
+ */
 @Mod(modid="Generic", name="Generic", version="0.0.0")
 @NetworkMod(clientSideRequired=true, serverSideRequired=false)
 public class Generic {
@@ -37,6 +50,19 @@ public class Generic {
 		.setHardness(0.5F).setStepSound(Block.soundGravelFootstep)
 		.setBlockName("genericDirt").setCreativeTab(CreativeTabs.tabBlock);
 	public final static Block genericOre = new GenericOre(501, 1);
+	// End Basic Blocks
+	
+	// Begin Damage Values and Metadata
+	public static final int multiBlockId = 502;
+	public static final Block multiBlock = new MultiBlock(multiBlockId);
+	
+	private static final String[] multiBlockNames = new String[] { 
+		"White Block", "Orange Block", "Magenta Block", "Light Blue Block",
+		"Yellow Block", "Light Green Block", "Pink Block", "Dark Grey Block",
+		"Light Grey Block", "Cyan Block", "Purple Block", "Blue Block",
+		"Brown Block", "Green Block", "Red Block", "Black Block"
+	};
+	// End Damage Values and Metadata
 	
 	// The instance of your mod that Forge uses.
 	@Instance
@@ -54,7 +80,20 @@ public class Generic {
 	
 	@Init
 	public void load(FMLInitializationEvent event) {
-		// Crafting and Smelting
+		proxy.registerRenderers();
+		
+		initCraftingAndSmelting();
+		initBasicItems();
+		initBasicBlocks();
+		initDamageValuesAndMetadata();
+	}
+	
+	@PostInit
+	public void postInit(FMLPostInitializationEvent event) {
+		// Stub Method
+	}
+	
+	private void initCraftingAndSmelting () {
 		ItemStack dirtStack = new ItemStack(Block.dirt);
 		ItemStack diamondsStack = new ItemStack(Item.diamond, 64);
 		ItemStack blackWoolStack = new ItemStack(Block.cloth, 42, 15);
@@ -76,14 +115,14 @@ public class Generic {
 		
 		GameRegistry.addSmelting(Block.stone.blockID, 
 				new ItemStack(Block.stoneBrick), 0.1f);
-		// End Crafting and Smelting
-		
-		// Basic Items
+	}
+	
+	private void initBasicItems () {
 		LanguageRegistry.addName(genericItem, "Generic Item");
 		LanguageRegistry.addName(genericIngot, "Specific Item");
-		// End Basic Items
-		
-		// Basic Blocks
+	}
+	
+	private void initBasicBlocks () {
 		GameRegistry.registerBlock(genericDirt);
 		LanguageRegistry.addName(genericDirt, "Generic Dirt");
 		MinecraftForge.setBlockHarvestLevel(genericDirt, "shovel", 0);
@@ -91,13 +130,19 @@ public class Generic {
 		GameRegistry.registerBlock(genericOre);
 		LanguageRegistry.addName(genericOre, "Genreric Ore");
 		MinecraftForge.setBlockHarvestLevel(genericOre, "pickaxe", 3);
-		// End Basic Blocks
-		
-		proxy.registerRenderers();
 	}
 	
-	@PostInit
-	public void postInit(FMLPostInitializationEvent event) {
-		// Stub Method
+	private void initDamageValuesAndMetadata () {
+		//Item.itemsList[multiBlockId] = new MultiItemBlock(multiBlockId);
+		
+		GameRegistry.registerBlock(multiBlock, MultiItemBlock.class);
+		
+		for (int ix = 0; ix < 16; ix++) {
+			ItemStack cloth = new ItemStack(Block.cloth, 1, ix);
+			ItemStack multiBlockStack = new ItemStack(multiBlock, 1, ix);
+			
+			GameRegistry.addShapelessRecipe(multiBlockStack, cloth, cloth);
+			LanguageRegistry.addName(multiBlockStack, multiBlockNames[multiBlockStack.getItemDamage()]);
+		}
 	}
 }
