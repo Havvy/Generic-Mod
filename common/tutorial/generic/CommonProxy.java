@@ -1,8 +1,5 @@
 package tutorial.generic;
 
-import havvy.minecraft.experience.CrystalizerContainer;
-import havvy.minecraft.experience.CrystalizerGui;
-import havvy.minecraft.experience.CrystalizerTileEntity;
 import net.minecraft.src.EntityPlayer;
 import net.minecraft.src.TileEntity;
 import net.minecraft.src.World;
