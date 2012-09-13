@@ -2,6 +2,7 @@ package tutorial.generic;
 
 // This Import list will grow longer with each additional tutorial.
 // It's not pruned between full class postings, unlike other tutorial code.
+import havvy.minecraft.experience.PacketHandler;
 import net.minecraft.src.Block;
 import net.minecraft.src.CraftingManager;
 import net.minecraft.src.CreativeTabs;
@@ -36,7 +37,8 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
  * function is inlined in the tutorials themselves.
  */
 @Mod(modid="Generic", name="Generic", version="0.0.0")
-@NetworkMod(clientSideRequired=true, serverSideRequired=false)
+@NetworkMod(clientSideRequired=true, serverSideRequired=false, 
+	channels={"GenericRandom"}, packetHandler = PacketHandler.class)
 public class Generic {
 
 	// Begin Basic Items
@@ -56,7 +58,7 @@ public class Generic {
 	public static final int multiBlockId = 502;
 	public static final Block multiBlock = new MultiBlock(multiBlockId);
 	
-	private static final String[] multiBlockNames = new String[] { 
+	private static final String[] multiBlockNames = { 
 		"White Block", "Orange Block", "Magenta Block", "Light Blue Block",
 		"Yellow Block", "Light Green Block", "Pink Block", "Dark Grey Block",
 		"Light Grey Block", "Cyan Block", "Purple Block", "Blue Block",
@@ -64,8 +66,13 @@ public class Generic {
 	};
 	// End Damage Values and Metadata
 	
+	// Begin Packet Handling
+	public static final Block randomBlock = new RandomBlock(503, 2);
+	// End Packet Handling
+	
+	
 	// The instance of your mod that Forge uses.
-	@Instance
+	@Instance("Generic")
 	public static Generic instance;
 	
 	// Says where the client and server 'proxy' code is loaded.
@@ -86,6 +93,7 @@ public class Generic {
 		initBasicItems();
 		initBasicBlocks();
 		initDamageValuesAndMetadata();
+		initPacketHandling();
 	}
 	
 	@PostInit
@@ -144,5 +152,10 @@ public class Generic {
 			GameRegistry.addShapelessRecipe(multiBlockStack, cloth, cloth);
 			LanguageRegistry.addName(multiBlockStack, multiBlockNames[multiBlockStack.getItemDamage()]);
 		}
+	}
+	
+	private void initPacketHandling () {
+		GameRegistry.registerBlock(randomBlock);
+		LanguageRegistry.addName(randomBlock, "Random Block");
 	}
 }
