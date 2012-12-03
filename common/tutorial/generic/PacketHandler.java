@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import net.minecraft.src.EntityClientPlayerMP;
 import net.minecraft.src.EntityPlayerMP;
-import net.minecraft.src.NetworkManager;
+import net.minecraft.src.INetworkManager;
 import net.minecraft.src.Packet250CustomPayload;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Side;
@@ -16,7 +16,7 @@ import cpw.mods.fml.common.network.Player;
 public class PacketHandler implements IPacketHandler {
 
 	@Override
-	public void onPacketData(NetworkManager manager,
+	public void onPacketData(INetworkManager manager,
 			Packet250CustomPayload packet, Player player) {
 		
 		if (packet.channel == "GenericRandom") {

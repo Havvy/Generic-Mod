@@ -36,7 +36,7 @@ public class GenericContainer extends Container {
         }
     }
     
-    @Override
+    // @Override FIXME
     public ItemStack transferStackInSlot (int slot) {
             ItemStack stack = null;
             Slot slotObject = (Slot) inventorySlots.get(slot);

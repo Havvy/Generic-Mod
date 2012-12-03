@@ -1,7 +1,5 @@
 package tutorial.generic;
 
-import havvy.minecraft.experience.CrystalizerContainer;
-
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.src.GuiContainer;
@@ -14,7 +12,7 @@ public class GenericGui extends GuiContainer {
 		super(new GenericContainer(inventory, tileEntity));
 	}
 	
-	@Override
+	// @Override FIXME
 	protected void drawGuiContainerForegroundLayer() {
 	    //draw text and stuff here
 	    //the parameters for drawString are: string, x, y, color
