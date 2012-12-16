@@ -2,10 +2,10 @@ package tutorial.generic;
 
 import java.util.Random;
 
-import net.minecraft.src.AxisAlignedBB;
-import net.minecraft.src.Material;
-import net.minecraft.src.Block;
-import net.minecraft.src.World;
+import net.minecraft.block.material.Material;
+import net.minecraft.block.Block;
+import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TomatoCrop extends GenericBlock {

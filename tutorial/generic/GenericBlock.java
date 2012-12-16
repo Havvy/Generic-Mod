@@ -1,7 +1,7 @@
 package tutorial.generic;
 
-import net.minecraft.src.Block;
-import net.minecraft.src.Material;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 
 public class GenericBlock extends Block {
 

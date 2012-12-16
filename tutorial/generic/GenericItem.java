@@ -1,7 +1,7 @@
 package tutorial.generic;
 
-import net.minecraft.src.CreativeTabs;
-import net.minecraft.src.Item;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
 
 public class GenericItem extends Item {
 

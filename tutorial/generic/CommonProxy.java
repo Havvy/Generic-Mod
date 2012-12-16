@@ -1,8 +1,7 @@
 package tutorial.generic;
 
-import net.minecraft.src.EntityPlayer;
-import net.minecraft.src.TileEntity;
-import net.minecraft.src.World;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.world.World;
 import cpw.mods.fml.common.network.IGuiHandler;
 
 public class CommonProxy implements IGuiHandler {
@@ -17,7 +16,7 @@ public class CommonProxy implements IGuiHandler {
 	@Override
 	public Object getServerGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
-        TileEntity tile = world.getBlockTileEntity(x, y, z);
+        // TileEntity tile = world.getBlockTileEntity(x, y, z);
         
         /*
         if (!(tile instanceof CrystalizerTileEntity)) {
@@ -33,6 +32,7 @@ public class CommonProxy implements IGuiHandler {
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
+	    /*
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         
         if (!(tileEntity instanceof GenericTileEntity)) {
@@ -40,5 +40,8 @@ public class CommonProxy implements IGuiHandler {
         }
         
         return new GenericGui(player.inventory, (GenericTileEntity) tileEntity);
+        */
+	    
+	    return null;
 	}
 }

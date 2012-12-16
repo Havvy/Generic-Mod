@@ -1,10 +1,10 @@
 package tutorial.generic;
 
 import java.util.Random;
-import net.minecraft.src.Block;
-import net.minecraft.src.BlockOre;
-import net.minecraft.src.CreativeTabs;
-import net.minecraft.src.Material;
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockOre;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 
 public class GenericOre extends BlockOre {
     public GenericOre (int id, int texture) {

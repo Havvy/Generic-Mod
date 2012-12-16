@@ -2,14 +2,13 @@ package tutorial.generic;
 
 // This Import list will grow longer with each additional tutorial.
 // It's not pruned between full class postings, unlike other tutorial code.
-import net.minecraft.src.Block;
-import net.minecraft.src.CraftingManager;
-import net.minecraft.src.CreativeTabs;
-import net.minecraft.src.Item;
-import net.minecraft.src.ItemSeeds;
-import net.minecraft.src.ItemStack;
-import net.minecraft.src.Material;
-import net.minecraftforge.common.ForgeHooks;
+import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemSeeds;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -44,7 +43,8 @@ public class Generic {
     // Begin Basic Items
     public final static Item genericItem = new GenericItem(5000);
     public final static Item genericIngot = new GenericItem(5001)
-            .setMaxStackSize(16).setIconIndex(1).setItemName("specificItem");
+
+    .setMaxStackSize(16).setIconIndex(1).setItemName("specificItem");
     // End Basic Items
 
     // Begin Basic Blocks
@@ -76,7 +76,8 @@ public class Generic {
     public static final ItemSeeds tomatoSeeds = (ItemSeeds) new ItemSeeds(5002,
             tomatoCrop.blockID, Block.tilledField.blockID).setIconIndex(2)
             .setTextureFile(CommonProxy.ITEMS_PNG);
-    public static final Item tomatoFruit = new GenericItem(5003).setIconIndex(3);
+    public static final Item tomatoFruit = new GenericItem(5003)
+            .setIconIndex(3);
     // End Plant
 
     // The instance of your mod that Forge uses.
@@ -102,6 +103,7 @@ public class Generic {
         initDamageValuesAndMetadata();
         initPacketHandling();
         initPlants();
+        initWorldGen();
     }
 
     @PostInit
@@ -130,6 +132,9 @@ public class Generic {
 
         GameRegistry.addSmelting(Block.stone.blockID, new ItemStack(
                 Block.stoneBrick), 0.1f);
+
+        FurnaceRecipes.smelting().addSmelting(Block.cloth.blockID, 15,
+                new ItemStack(Item.bed), 0.1f);
     }
 
     private void initBasicItems () {
@@ -148,8 +153,6 @@ public class Generic {
     }
 
     private void initDamageValuesAndMetadata () {
-        // Item.itemsList[multiBlockId] = new MultiItemBlock(multiBlockId);
-
         GameRegistry.registerBlock(multiBlock, MultiItemBlock.class);
 
         for (int ix = 0; ix < 16; ix++) {
@@ -176,5 +179,9 @@ public class Generic {
                 new ItemStack(tomatoFruit));
 
         GameRegistry.registerBlock(tomatoCrop);
+    }
+    
+    private void initWorldGen () {
+        GameRegistry.registerWorldGenerator(new BasicWorldGen());
     }
 }
