@@ -143,11 +143,11 @@ public class Generic {
     }
 
     private void initBasicBlocks () {
-        GameRegistry.registerBlock(genericDirt);
+        GameRegistry.registerBlock(genericDirt, "genericDirt");
         LanguageRegistry.addName(genericDirt, "Generic Dirt");
         MinecraftForge.setBlockHarvestLevel(genericDirt, "shovel", 0);
 
-        GameRegistry.registerBlock(genericOre);
+        GameRegistry.registerBlock(genericOre, "genericOre");
         LanguageRegistry.addName(genericOre, "Genreric Ore");
         MinecraftForge.setBlockHarvestLevel(genericOre, "pickaxe", 3);
     }
@@ -166,7 +166,7 @@ public class Generic {
     }
 
     private void initPacketHandling () {
-        GameRegistry.registerBlock(randomBlock);
+        GameRegistry.registerBlock(randomBlock, "randomBlock");
         LanguageRegistry.addName(randomBlock, "Random Block");
     }
 
@@ -178,7 +178,7 @@ public class Generic {
         GameRegistry.addShapelessRecipe(new ItemStack(tomatoSeeds, 4),
                 new ItemStack(tomatoFruit));
 
-        GameRegistry.registerBlock(tomatoCrop);
+        GameRegistry.registerBlock(tomatoCrop, "tomatoCrop");
     }
     
     private void initWorldGen () {
