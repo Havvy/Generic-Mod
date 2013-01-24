@@ -72,9 +72,9 @@ public class TomatoCrop extends GenericBlock {
     public int idDropped (int metadata, Random random, int par2) {
         switch (metadata) {
         case 0:
-            return Generic.tomatoSeeds.shiftedIndex;
+            return Generic.tomatoSeeds.itemID;
         case 1:
-            return Generic.tomatoFruit.shiftedIndex;
+            return Generic.tomatoFruit.itemID;
         default:
             // Error case!
             return -1; // air
@@ -83,6 +83,6 @@ public class TomatoCrop extends GenericBlock {
 
     @Override
     public int idPicked (World world, int x, int y, int z) {
-        return Generic.tomatoSeeds.shiftedIndex;
+        return Generic.tomatoSeeds.itemID;
     }
 }

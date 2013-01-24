@@ -23,6 +23,6 @@ public class GenericOre extends BlockOre {
 
     @Override
     public int idDropped (int par1, Random random, int par2) {
-        return Generic.genericIngot.shiftedIndex;
+        return Generic.genericIngot.itemID;
     }
 }
