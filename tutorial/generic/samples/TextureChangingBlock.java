@@ -32,6 +32,12 @@ public class TextureChangingBlock extends Block implements ITickHandler {
 
     @Override
     @SideOnly(Side.CLIENT)
+    public void tickEnd (EnumSet<TickType> type, Object... tickData) {
+
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
     public EnumSet<TickType> ticks () {
         return EnumSet.of(TickType.CLIENT);
     }
