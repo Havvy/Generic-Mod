@@ -11,10 +11,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PostInit;
-import cpw.mods.fml.common.Mod.PreInit;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -88,12 +86,12 @@ public class Generic {
     @SidedProxy(clientSide = "tutorial.generic.client.ClientProxy", serverSide = "tutorial.generic.CommonProxy")
     public static CommonProxy proxy;
 
-    @PreInit
+    @EventHandler
     public void preInit (FMLPreInitializationEvent event) {
         // Stub Method
     }
 
-    @Init
+    @EventHandler
     public void load (FMLInitializationEvent event) {
         proxy.registerRenderers();
 
@@ -106,7 +104,7 @@ public class Generic {
         initWorldGen();
     }
 
-    @PostInit
+    @EventHandler
     public void postInit (FMLPostInitializationEvent event) {
         // Stub Method
     }
